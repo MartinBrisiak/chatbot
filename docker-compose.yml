@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: bot
+    ports:
+      - "5005:5005"
+
+  ui:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: ui
+    ports:
+      - "5000:5000"

@@ -6,11 +6,10 @@ RUN useradd -ms /bin/bash bot && mkdir /bot
 USER bot
 
 ENV port=5005 \
-    model=/bot/src/models/model.tar.gz
+    model=/bot/models/model.tar.gz
     
-COPY --chown=bot:bot src /bot/src
-EXPOSE 5005
-WORKDIR /bot/src
+COPY --chown=bot:bot bot /bot
+WORKDIR /bot
 
 ENTRYPOINT python3 -m rasa run --enable-api \
 --port=$port \
