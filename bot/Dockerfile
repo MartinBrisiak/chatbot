@@ -1,4 +1,4 @@
-ARG from=rasa/rasa:2.2.8
+ARG from=rasa/rasa:2.8.8
 FROM ${from}
 
 USER root

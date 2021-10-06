@@ -1,18 +1,39 @@
 version: "3.9"
 services:
 
-  bot:
-    build:
-      context: .
-      dockerfile: bot/Dockerfile
-    container_name: bot
-    ports:
-      - "5005:5005"
+  # bot:
+  #   build:
+  #     context: .
+  #     dockerfile: bot/Dockerfile
+  #   container_name: bot
+  #   ports:
+  #     - "5005:5005"
 
-  ui:
-    build:
-      context: .
-      dockerfile: bot/Dockerfile
-    container_name: ui
+  # ui:
+  #   build:
+  #     context: .
+  #     dockerfile: bot/Dockerfile
+  #   container_name: ui
+  #   ports:
+  #     - "5000:5000"
+
+
+  # backend:
+  #   build: .
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - .:/code
+  #     - logvolume01:/var/log
+  #   links:
+  #     - redis
+
+  db:
+    image: postgres:13.4-alpine
+    container_name: db
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
     ports:
-      - "5000:5000"
+      - 5432:5432
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
