@@ -6,4 +6,5 @@ Sample project with chatbot 'n stuff
 
 - [ ] replace postre with mongo
 - [ ] create ui chatwindow
-- [ ] implement airbnb rules to backend
+- [x] implement airbnb rules to backend
+- [x] implement some typescript :( and re-innit eslint
