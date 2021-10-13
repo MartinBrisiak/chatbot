@@ -28,12 +28,32 @@ services:
   #   links:
   #     - redis
 
-  db:
-    image: postgres:13.4-alpine
-    container_name: db
+  # db:
+  #   image: postgres:13.4-alpine
+  #   container_name: db
+  #   environment:
+  #     - POSTGRES_PASSWORD=mysecretpassword
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  mongo:
+    image: mongo:5.0.3
+    container_name: mongo
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - 5432:5432
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    # restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/

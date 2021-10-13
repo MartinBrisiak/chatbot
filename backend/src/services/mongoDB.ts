@@ -1,7 +1,8 @@
-const { Client } = require('pg');
-const assert = require('assert');
+import { MongoClient } from 'mongodb';
+import assert from 'assert';
+const config = require('../config.js');
 
-export module DB {
+export module PostgreDB {
 
   let myDb: any;
 
@@ -16,14 +17,6 @@ export module DB {
       return callback(null, myDb);
     }
 
-    const client = new Client({
-      user: 'postgres',
-      host: '172.17.0.1',
-      database: 'postgres',
-      password: 'mysecretpassword',
-      port: 5432,
-    });
-
     const connected = (err: any, db: any) => {
       // console.log(`'connected ${err} ${db}'`)
       if (err) {
@@ -35,8 +28,9 @@ export module DB {
       return callback(null, myDb);
     };
 
-    client.connect(connected);
-
+    // MongoClient.connect(config.db.connectionString, config.db.connectionOptions, connected);
+    MongoClient.connect(config.db.connectionString, connected);
+    
     return null;
   };
 
