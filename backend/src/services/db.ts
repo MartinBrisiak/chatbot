@@ -3,17 +3,17 @@ const assert = require('assert');
 
 export module DB {
 
-  let _db: any;
+  let myDb: any;
 
   export const getDb = () => {
-    assert.ok(_db, 'Db has not been initialized. Please called init first.');
-    return _db;
+    assert.ok(myDb, 'Db has not been initialized. Please called init first.');
+    return myDb;
   };
 
   export const initDb = (callback: any) => {
-    if (_db) {
+    if (myDb) {
       console.warn('Trying to init DB again!');
-      return callback(null, _db);
+      return callback(null, myDb);
     }
 
     const client = new Client({
@@ -31,15 +31,17 @@ export module DB {
         return callback(err);
       }
       console.log('"DB initialized - connected to: TODO"');
-      _db = db;
-      return callback(null, _db);
+      myDb = db;
+      return callback(null, myDb);
     };
 
     client.connect(connected);
+
+    return null;
   };
 
   export async function find() {
-    const res = await _db.query('SELECT info FROM orders');
+    const res = await myDb.query('SELECT info FROM orders');
     console.log(res);
     return res;
   }
