@@ -1,4 +1,4 @@
-export const db = {
-    connectionString: "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority",
-    connectionOptions: "sjgfcfgd"
-}
+exports.db = {
+  connectionString: 'mongodb://root:example@mongodb:27017/?retryWrites=true&w=majority&authSource=admin',
+  connectionOptions: 'sjgfcfgd',
+};
