@@ -1,12 +1,12 @@
-ARG from=node:14.15.4-alpine3.12
+ARG from=node:19.1.0-alpine3.16
 FROM ${from}
 
 USER root
 
-RUN addgroup -S ui && adduser -S ui -G ui
-USER ui
-ENV port=5000
-COPY --chown=ui:ui ui /ui
+RUN addgroup -S aifactory && adduser -S aifactory -G aifactory
+USER aifactory
+ENV port=80
+COPY --chown=aifactory:aifactory ui /ui
 WORKDIR /ui
 RUN npm install && \
     npm install serve && \
